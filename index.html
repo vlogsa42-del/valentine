@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Pentru tine ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .screen {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #ff4d6d;
+        }
+
+        input {
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            border: none;
+            text-align: center;
+            outline: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 15px 35px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            background: #ff4d6d;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255,77,109,0.6);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .container {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .message, .final-message {
+            font-size: 1.6rem;
+            margin: 20px 0;
+            opacity: 0;
+            animation: showText 1.5s forwards;
+        }
+
+        .message:nth-child(2) { animation-delay: 1s; }
+        .message:nth-child(3) { animation-delay: 2.5s; }
+        .message:nth-child(4) { animation-delay: 4s; }
+        .message:nth-child(5) { animation-delay: 5.5s; }
+
+        .invite {
+            margin-top: 50px;
+            padding: 25px;
+            border: 2px solid #ff4d6d;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: showText 1.5s forwards;
+            animation-delay: 7s;
+        }
+
+        .final-message {
+            margin-top: 40px;
+            font-size: 2rem;
+            color: #ff4d6d;
+            font-weight: bold;
+            animation-delay: 9s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes showText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .confetti {
+            position: fixed;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PAROLA -->
+<div class="screen" id="passwordScreen">
+    <h1>🔒 Acces secret</h1>
+    <input type="password" id="password" placeholder="Introdu parola">
+    <br>
+    <button onclick="checkPassword()">Intră</button>
+</div>
+
+<!-- BUTON START -->
+<div class="screen hidden" id="startScreen">
+    <h1>❤️ Am ceva special pentru tine ❤️</h1>
+    <button onclick="startLove()">Apasă aici</button>
+</div>
+
+<!-- CONȚINUT -->
+<div class="screen hidden container" id="content">
+    <h1>❤️ Pentru tine ❤️</h1>
+
+    <div class="message">Te iubesc mult de tot, piti meu.</div>
+    <div class="message">Ești cea mai importantă femeie din viața mea.</div>
+    <div class="message">Tu pentru mine ești jumătatea mea.</div>
+    <div class="message">Ești universul meu.</div>
+
+    <div class="invite">
+        Pe data de <strong>14.02.2026</strong> sunteți invitată la o <strong>întâlnire secretă</strong>.<br><br>
+        📍 Prezența obligatorie<br>
+        🖤 Dress code: negru<br>
+        ⏰ Fiți gata până la ora <strong>19:00</strong>
+    </div>
+
+    <div class="final-message">
+        Te iubesc infinit. Tu ești azi, mâine și pentru totdeauna.
+    </div>
+</div>
+
+<audio id="music" src="tzanca.mp3"></audio>
+
+<script>
+    function checkPassword() {
+        const pass = document.getElementById("password").value;
+        if (pass === "12.02.2022") {
+            document.getElementById("passwordScreen").classList.add("hidden");
+            document.getElementById("startScreen").classList.remove("hidden");
+        } else {
+            alert("Parolă greșită ❤️");
+        }
+    }
+
+    function startLove() {
+        document.getElementById("startScreen").classList.add("hidden");
+        document.getElementById("content").classList.remove("hidden");
+        document.getElementById("music").play();
+
+        setTimeout(startConfetti, 9000);
+    }
+
+    function startConfetti() {
+        for (let i = 0; i < 150; i++) {
+            const c = document.createElement("div");
+            c.classList.add("confetti");
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.backgroundColor =
+                ["#ff4d6d", "#ffffff", "#ff99aa"][Math.floor(Math.random() * 3)];
+            c.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            document.body.appendChild(c);
+
+            setTimeout(() => c.remove(), 6000);
+        }
+    }
+</script>
+
+</body>
+</html>
